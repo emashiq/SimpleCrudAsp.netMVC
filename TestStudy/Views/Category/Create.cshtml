@@ -1,0 +1,40 @@
+﻿@{ 
+    var cat = new TestStudy.Models.TestDb().categories;
+}
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding:50px;">
+    <span class="alert-danger">@ViewBag.message</span>
+    @using (Html.BeginForm("Create", "Category"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            <label for="Category Name">Category Name</label>
+            <input type="text" class="form-control" name="name" />
+            <label for="Parent Id">Choose Parent Category Name</label>
+            <select class="form-control" name="CategoryId">
+                <option value="null">Select</option>
+                @foreach (var item in cat)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+
+            </select>
+            <br>
+            <input type="submit" value="Create New" class="btn btn-info" />
+
+        </div>
+
+
+
+    }
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
